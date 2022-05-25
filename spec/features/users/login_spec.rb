@@ -20,10 +20,9 @@ RSpec.describe 'login page' do
       fill_in 'Email', with: "drewdrew@drew.com"
       fill_in 'Password', with: "snozberry"
       click_button("Login")
-
       expect(current_path).to eq('/login')
       within '.flash' do
-        expect(page).to have_content('Invalid email/password')
+        expect(page).to have_content('Invalid Entry')
       end
     end
   end

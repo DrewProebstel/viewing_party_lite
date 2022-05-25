@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
       if @user.save
         flash[:success] = 'Account Successfully Created'
+        session[:user_id]=@user.id
         redirect_to user_dashboard_path(@user)
       else
         flash[:error] = 'Invalid Entry'
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    binding.pry
     @user = User.find(params[:user_id])
   end
 
@@ -23,21 +25,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
-  def login_form
-
-  end
-  
-  def login_user
-    user = User.find_by(email: params[:email])
-    if user.authenticate(params[:password])
-      session[:user_id] = user.id
-      flash[:success] = "Welcome, #{user.name}"
-      redirect_to user_dashboard_path(user)
-    else
-      flash[:error] = "Invalid email/password"
-      render :login_form
-    end
-end
+#   def login_form
+#
+#   end
+#
+#   def login_user
+#     user = User.find_by(email: params[:email])
+#     if user.authenticate(params[:password])
+#       session[:user_id] = user.id
+#       flash[:success] = "Welcome, #{user.name}"
+#       redirect_to user_dashboard_path(user)
+#     else
+#       flash[:error] = "Invalid email/password"
+#       render :login_form
+#     end
+# end
 
   private
     def user_params
