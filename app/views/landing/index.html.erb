@@ -6,5 +6,9 @@
   <% end %></center>
 
 <div class="login">
-  <%= button_to 'Login', '/login', method: :get %>
+  <% if session[:user_id] %>
+    <%= button_to 'Log Out', '/login', method: :delete %>
+  <% else %>
+    <%= button_to 'Log In', '/login', method: :get %>
+  <% end %>
 </div>
